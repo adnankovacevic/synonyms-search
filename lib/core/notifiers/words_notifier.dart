@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:synonyms_search/core/repositories/words_repository.dart';
 
@@ -6,6 +7,25 @@ final wordsRepositoryProvider = Provider((ref) => WordsRepository());
 final wordsNotifierProvider =
     StateNotifierProvider<SynonymsNotifier, Map<String, Set<String>>>(
         (ref) => SynonymsNotifier(ref.read(wordsRepositoryProvider)));
+
+final searchControllerProvider = Provider<TextEditingController>((ref) {
+  final controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});
+final wordTextEditingControllerProvider =
+    Provider<TextEditingController>((ref) {
+  final controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});
+
+final synonymsTextEditingControllerProvider =
+    Provider<TextEditingController>((ref) {
+  final controller = TextEditingController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});
 
 class SynonymsNotifier extends StateNotifier<Map<String, Set<String>>> {
   SynonymsNotifier(this.repository) : super({});

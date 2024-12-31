@@ -9,18 +9,19 @@ import 'package:synonyms_search/views/add_word_view.dart';
 class SearchWordView extends ConsumerWidget {
   SearchWordView({super.key});
 
-  final TextEditingController searchController = TextEditingController();
   final Debouncer debouncer = Debouncer();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final searchTextEditigController = ref.watch(searchControllerProvider);
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
         title: Padding(
           padding: const EdgeInsets.only(top: 24, left: 16, right: 16),
           child: SearchBar(
-            controller: searchController,
+            controller: searchTextEditigController,
             shape: WidgetStatePropertyAll<OutlinedBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -54,9 +55,9 @@ class SearchWordView extends ConsumerWidget {
 
                 if (synonyms.isEmpty) {
                   return Center(
-                    child: searchController.text.isNotEmpty
+                    child: searchTextEditigController.text.isNotEmpty
                         ? Text(
-                            "No result for '${searchController.text}' found.")
+                            "No result for '${searchTextEditigController.text}' found.")
                         : const Text("No words available!"),
                   );
                 }

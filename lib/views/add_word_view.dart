@@ -5,15 +5,15 @@ import 'package:synonyms_search/core/notifiers/words_notifier.dart';
 import 'package:synonyms_search/core/themes/app_colors.dart';
 
 class AddWordView extends ConsumerWidget {
-  AddWordView({super.key});
-
-  final TextEditingController wordTextEditingController =
-      TextEditingController();
-  final TextEditingController synonymsTextEditinController =
-      TextEditingController();
+  const AddWordView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final wordTextEditingController =
+        ref.watch(wordTextEditingControllerProvider);
+    final synonymsTextEditinController =
+        ref.watch(synonymsTextEditingControllerProvider);
+
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
